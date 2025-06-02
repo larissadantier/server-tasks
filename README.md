@@ -170,8 +170,8 @@ This project is under the MIT license. See the [LICENSE](LICENSE) file for more 
   </a>
 </div>
 <br/>
-<p align="center">Desenvolvido por Larissa Dantier 🚀 </p> 
-<p align="center">Entre em contato! 👏 </p>
+<p align="center">Developed por Larissa Dantier 🚀 </p> 
+<p align="center">Contact us 👏 </p>
 <div align="center">
 <a href="https://www.linkedin.com/in/larissadantier/" target="_blank">
     <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" />
