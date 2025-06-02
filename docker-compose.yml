@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: servertask
+    environment:
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+    volumes:
+      - ./src/db:/schema
+      - ./src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - ${POSTGRESQL_PORT}:${POSTGRESQL_PORT}
+    env-file:
+      - .env
