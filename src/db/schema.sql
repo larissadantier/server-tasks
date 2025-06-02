@@ -1,3 +1,13 @@
 CREATE DATABASE servertasks;
 
 \c servertasks
+
+
+CREATE TABLE IF NOT EXISTS tasks (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(256) NOT NULL,
+  description VARCHAR(256),
+  completed_at TIMESTAMP DEFAULT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT NULL
+);
