@@ -28,7 +28,7 @@ function init() {
         process.exit(1)
       }
 
-      fastify.log.info('🔥 Server Running on port 3000')
+      fastify.log.info(`🔥 Server Running on port ${process.env.SERVER_PORT}`)
     }
   )
 }
