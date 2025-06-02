@@ -1,5 +1,6 @@
 import fastifyPostgres from '@fastify/postgres'
 import Fastify from 'fastify'
+import { routes } from './routes'
 
 const fastify = Fastify({
   logger: true,
@@ -8,6 +9,8 @@ const fastify = Fastify({
 fastify.register(fastifyPostgres, {
   connectionString: '',
 })
+
+fastify.register(routes)
 
 fastify.setErrorHandler((err, _, reply) => {
   reply.code(500).send({ message: err.message })
@@ -25,7 +28,7 @@ function init() {
         process.exit(1)
       }
 
-      fastify.log.info('🔥 Server Running on port 3333')
+      fastify.log.info('🔥 Server Running on port 3000')
     }
   )
 }
