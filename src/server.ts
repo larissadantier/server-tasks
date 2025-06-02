@@ -1,33 +1,33 @@
-import fastifyPostgres from "@fastify/postgres";
-import Fastify from "fastify";
+import fastifyPostgres from '@fastify/postgres'
+import Fastify from 'fastify'
 
 const fastify = Fastify({
-	logger: true,
-});
+  logger: true,
+})
 
 fastify.register(fastifyPostgres, {
-	connectionString: "",
-});
+  connectionString: '',
+})
 
 fastify.setErrorHandler((err, _, reply) => {
-	reply.code(500).send({ message: err.message });
-});
+  reply.code(500).send({ message: err.message })
+})
 
 function init() {
-	fastify.listen(
-		{
-			port: Number(process.env.SERVER_PORT),
-			host: process.env.SERVER_HOST,
-		},
-		(err) => {
-			if (err) {
-				fastify.log.error(err);
-				process.exit(1);
-			}
+  fastify.listen(
+    {
+      port: Number(process.env.SERVER_PORT),
+      host: process.env.SERVER_HOST,
+    },
+    err => {
+      if (err) {
+        fastify.log.error(err)
+        process.exit(1)
+      }
 
-			fastify.log.info("🔥 Server Running on port 3333");
-		},
-	);
+      fastify.log.info('🔥 Server Running on port 3333')
+    }
+  )
 }
 
-init();
+init()
