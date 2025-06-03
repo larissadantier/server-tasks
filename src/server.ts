@@ -7,7 +7,7 @@ const fastify = Fastify({
 })
 
 fastify.register(fastifyPostgres, {
-  connectionString: '',
+  connectionString: process.env.DATABASE_URL || '',
 })
 
 fastify.register(routes)
