@@ -1,7 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify'
+import TaskController from '../controllers/taskController'
 
 export const taskRouter: FastifyPluginAsync = async fastify => {
-  fastify.get('/', (req, reply) => {
-    reply.code(200).send({ message: true })
-  })
+  fastify.post('/', TaskController.store)
 }
