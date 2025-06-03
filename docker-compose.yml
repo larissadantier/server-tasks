@@ -10,5 +10,5 @@ services:
       - ./src/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:
       - ${POSTGRESQL_PORT}:${POSTGRESQL_PORT}
-    env-file:
+    env_file:
       - .env
