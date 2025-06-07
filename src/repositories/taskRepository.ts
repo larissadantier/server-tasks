@@ -61,6 +61,24 @@ class TaskRepository {
     return rows[0]
   }
 
+  async completeTask(fastify: FastifyInstance, id: number) {
+    const { rows } = await fastify.pg.query(
+      `
+        UPDATE tasks 
+        SET completed_at =
+          CASE
+            WHEN completed_at IS NULL THEN current_timestamp
+            ELSE NULL
+          END
+        WHERE id = $1
+        RETURNING completed_at
+      `,
+      [id]
+    )
+
+    return rows[0]
+  }
+
   async delete(fastify: FastifyInstance, id: number) {
     await fastify.pg.query('DELETE FROM tasks WHERE id = $1', [id])
   }

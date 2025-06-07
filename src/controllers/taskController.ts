@@ -56,7 +56,7 @@ class TaskController {
     const task = await TaskRepository.findById(req.server, params.id)
 
     if (!task) {
-      reply.code(400).send({
+      reply.code(404).send({
         code: 'TASK_NOT_FOUND',
         message: 'The requested task does not exists.',
       })
@@ -69,7 +69,34 @@ class TaskController {
     reply.code(200).send(updatedTask)
   }
 
-  async delete(
+  async complete(
+    req: FastifyRequest<{
+      Params: { id: number }
+    }>,
+    reply: FastifyReply
+  ) {
+    const { params } = req
+
+    const task = await TaskRepository.findById(req.server, params.id)
+
+    if (!task) {
+      reply.code(404).send({
+        code: 'TASK_NOT_FOUND',
+        message: 'The requested task does not exists.',
+      })
+
+      return
+    }
+
+    const taskCompleted = await TaskRepository.completeTask(
+      req.server,
+      params.id
+    )
+
+    reply.code(200).send(taskCompleted)
+  }
+
+  async destroy(
     req: FastifyRequest<{
       Params: { id: number }
     }>,
