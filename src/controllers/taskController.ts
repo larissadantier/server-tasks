@@ -2,7 +2,20 @@ import type { FastifyReply, FastifyRequest } from 'fastify'
 import TaskRepository from '../repositories/taskRepository'
 
 class TaskController {
-  async index() {}
+  async index(
+    req: FastifyRequest<{ Querystring: { search?: string } }>,
+    reply: FastifyReply
+  ) {
+    const { query } = req
+
+    const search = query?.search?.trim() || ''
+
+    const tasks = await TaskRepository.findAll(req.server, {
+      search: search,
+    })
+
+    reply.code(200).send({ data: tasks })
+  }
 
   async store(
     req: FastifyRequest<{ Body: { title: string; description?: string } }>,
