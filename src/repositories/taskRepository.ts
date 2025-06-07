@@ -60,6 +60,10 @@ class TaskRepository {
 
     return rows[0]
   }
+
+  async delete(fastify: FastifyInstance, id: number) {
+    await fastify.pg.query('DELETE FROM tasks WHERE id = $1', [id])
+  }
 }
 
 export default new TaskRepository()

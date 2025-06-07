@@ -68,6 +68,39 @@ class TaskController {
 
     reply.code(200).send(updatedTask)
   }
+
+  async delete(
+    req: FastifyRequest<{
+      Params: { id: number }
+    }>,
+    reply: FastifyReply
+  ) {
+    const { params } = req
+
+    if (!params.id) {
+      reply.code(400).send({
+        code: 'QUERY_ID_NOT_FOUND',
+        message: "The query 'id' of task is required.",
+      })
+
+      return
+    }
+
+    const task = await TaskRepository.findById(req.server, params.id)
+
+    if (!task) {
+      reply.code(400).send({
+        code: 'TASK_NOT_FOUND',
+        message: 'The requested task does not exists.',
+      })
+
+      return
+    }
+
+    await TaskRepository.delete(req.server, params.id)
+
+    reply.code(200).send({ success: true })
+  }
 }
 
 export default new TaskController()
