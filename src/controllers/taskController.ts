@@ -32,7 +32,41 @@ class TaskController {
 
     const task = await TaskRepository.create(req.server, body)
 
-    reply.code(200).send(task)
+    reply.code(201).send(task)
+  }
+
+  async update(
+    req: FastifyRequest<{
+      Body: { title?: string; description?: string }
+      Params: { id: number }
+    }>,
+    reply: FastifyReply
+  ) {
+    const { params, body } = req
+
+    if (!params.id) {
+      reply.code(400).send({
+        code: 'QUERY_ID_NOT_FOUND',
+        message: "The query 'id' of task is required.",
+      })
+
+      return
+    }
+
+    const task = await TaskRepository.findById(req.server, params.id)
+
+    if (!task) {
+      reply.code(400).send({
+        code: 'TASK_NOT_FOUND',
+        message: 'The requested task does not exists.',
+      })
+
+      return
+    }
+
+    const updatedTask = await TaskRepository.update(req.server, params.id, body)
+
+    reply.code(200).send(updatedTask)
   }
 }
 
