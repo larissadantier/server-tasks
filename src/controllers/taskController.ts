@@ -44,9 +44,18 @@ class TaskController {
   ) {
     const { params, body } = req
 
+    if (!body) {
+      reply.code(400).send({
+        code: 'BODY_IS_EMPTY',
+        message: 'The body with title or description is required.',
+      })
+
+      return
+    }
+
     if (!params.id) {
       reply.code(400).send({
-        code: 'QUERY_ID_NOT_FOUND',
+        code: 'QUERY_ID_PARAM_NOT_FOUND',
         message: "The query 'id' of task is required.",
       })
 
