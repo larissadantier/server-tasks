@@ -100,16 +100,16 @@ Toggle a task’s completion status.
 - If `completed_at` is `null`, set it to the current timestamp.  
 - If `completed_at` has a value, reset it to `null`.
 
-### `POST /tasks/import`
+### `GET /tasks/export-csv`
 
 Bulk import tasks from a CSV file.
 
 **CSV Format:**
 
 ```
-title,description
-Task 1,Description for Task 1
-Task 2,Description for Task 2
+id,title,description
+1,Task 1,Description for Task 1
+2,Task 2,Description for Task 2
 ...
 ```
 
