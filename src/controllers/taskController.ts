@@ -1,5 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import TaskRepository from '../repositories/taskRepository'
+import { generateCSV } from '../lib/csv-stringify'
 
 class TaskController {
   async index(
@@ -136,6 +137,20 @@ class TaskController {
     await TaskRepository.delete(req.server, params.id)
 
     reply.code(200).send({ success: true })
+  }
+
+  async csv(req: FastifyRequest, reply: FastifyReply) {
+    const tasks = await TaskRepository.exportCSV(req.server);
+
+    const csv = generateCSV(tasks, {
+      columns: { 
+        id: 'ID',
+        title: 'Title',
+        description: 'Description'
+      }
+    })
+
+    reply.header('Content-Type', 'text/csv; charset=utf-8').header('Content-Disposition', 'attachment; filename="tasks.csv"').code(200).send(csv)
   }
 }
 

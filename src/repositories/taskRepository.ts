@@ -82,6 +82,12 @@ class TaskRepository {
   async delete(fastify: FastifyInstance, id: number) {
     await fastify.pg.query('DELETE FROM tasks WHERE id = $1', [id])
   }
+
+  async exportCSV(fastify: FastifyInstance) { 
+    const { rows } = await fastify.pg.query('SELECT id, title, description FROM tasks ORDER BY id');
+
+    return rows;
+  }
 }
 
 export default new TaskRepository()

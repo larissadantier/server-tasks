@@ -7,4 +7,5 @@ export const taskRouter: FastifyPluginAsync = async fastify => {
   fastify.patch('/:id/complete', TaskController.complete)
   fastify.post('/', TaskController.store)
   fastify.delete('/:id', TaskController.destroy)
+  fastify.get('/export-csv', TaskController.csv)
 }
