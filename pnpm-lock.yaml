@@ -11,6 +11,9 @@ importers:
       '@fastify/postgres':
         specifier: ^6.0.2
         version: 6.0.2(pg@8.16.0)
+      csv-stringify:
+        specifier: ^6.5.2
+        version: 6.5.2
       fastify:
         specifier: 5.3.3
         version: 5.3.3
@@ -292,6 +295,9 @@ packages:
   cookie@1.0.2:
     resolution: {integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==}
     engines: {node: '>=18'}
+
+  csv-stringify@6.5.2:
+    resolution: {integrity: sha512-RFPahj0sXcmUyjrObAK+DOWtMvMIFV328n4qZJhgX3x2RqkQgOTU2mCUmiFR0CzM6AzChlRSUErjiJeEt8BaQA==}
 
   dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
@@ -700,6 +706,8 @@ snapshots:
       fastq: 1.19.1
 
   cookie@1.0.2: {}
+
+  csv-stringify@6.5.2: {}
 
   dequal@2.0.3: {}
 
